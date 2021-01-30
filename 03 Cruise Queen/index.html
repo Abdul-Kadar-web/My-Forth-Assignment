@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curise Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+
+        <div class="booking-content">
+            <h1>Cruise Queen</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book./p>
+        </div>
+
+
+        <div class="booking-form">
+            <h3>Book Ocean Time</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($150)</label>
+                    <input id="firstClass-booking" type="text" class="form-control text-center" value="1">
+                </div>
+                <div class="plus-minus-btn">
+                    <input id="firstClassBooking-plus" type="button" value="+">
+                    <input id="firstClassBooking-minus" type="button" value="-">
+                </div>
+            </div>
+
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy($100)</label>
+                    <input id="economy-booking" type="text" class="form-control text-center" value="1">
+                </div>
+                <div>
+                    <input id="economyBooking-plus" type="button" value="+">
+                    <input id="economyBooking-minus" type="button" value="-">
+                </div>
+
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="totalBooking-price">$500</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="tax-amount">$50</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grandTotalBooking-price">$550</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="myFunction()" class="btn-style">Book Now</button>
+            <p id="confirmation-Booking"></p>
+        </div>
+    </main>
+
+    <!--Thank You-->
+</body>
+
+<script>
+    document.getElementById('firstClassBooking-plus').addEventListener('click', function () {
+        handleOceanTimeBooking('firstClass', true);
+    });
+
+    document.getElementById('firstClassBooking-minus').addEventListener('click', function () {
+        handleOceanTimeBooking('firstClass', false);
+    });
+
+
+    document.getElementById('economyBooking-plus').addEventListener('click', function () {
+        handleOceanTimeBooking('economy', true);
+    });
+
+    document.getElementById('economyBooking-minus').addEventListener('click', function () {
+        handleOceanTimeBooking('economy', false);
+    });
+
+
+    function handleOceanTimeBooking(oceanTime, isIncrease) {
+        const oceanTimeInput = document.getElementById(oceanTime + '-booking');
+        const oceanTimeBooking = getInputValue(oceanTime);
+        let oceanTimeNewBooking = oceanTimeBooking;
+        if (isIncrease == true) {
+            oceanTimeNewBooking = oceanTimeBooking + 1;
+        }
+        if (isIncrease == false && oceanTimeBooking > 0) {
+            oceanTimeNewBooking = oceanTimeBooking - 1
+        }
+        oceanTimeInput.value = oceanTimeNewBooking;
+        let oceanTimeTotal = 0;
+        if (oceanTime == 'firstClass') {
+            oceanTimeTotal = oceanTimeNewBooking * 150;
+        }
+        if (oceanTime == 'economy') {
+            oceanTimeTotal = oceanTimeNewBooking * 100;
+        }
+
+        const firstClassBooking = getInputValue('firstClass');
+        const economyBooking = getInputValue('economy')
+
+
+
+        const totalBookingPrice = firstClassBooking * 150 + economyBooking * 100;
+        document.getElementById('totalBooking-price').innerText = '$' + totalBookingPrice;
+
+        const tax = Math.round(totalBookingPrice * 0.1);
+        document.getElementById('tax-amount').innerText = '$' + tax;
+
+        const grandTotalBookingPrice = totalBookingPrice + tax;
+        document.getElementById('grandTotalBooking-price').innerText = '$' + grandTotalBookingPrice;
+
+    }
+
+
+
+    function getInputValue(oceanTime) {
+        const oceanTimeInput = document.getElementById(oceanTime + '-booking');
+        const oceanTimeBooking = parseInt(oceanTimeInput.value);
+        return oceanTimeBooking;
+    }
+
+
+    function myFunction() {
+        var txt;
+        var r = confirm("Press a button!");
+        if (r == true) {
+            txt = "Your confirmed Your Booking ! Welcome to Ocean Time";
+        } else {
+            txt = "You Cancel Your Booking!";
+        }
+        document.getElementById("confirmation-Booking").innerHTML = txt;
+    }
+
+</script>
+
+</html>
