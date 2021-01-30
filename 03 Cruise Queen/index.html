@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <button onclick="myFunction()" class="btn-style">Book Now</button>
+            <button onclick="letConfirm()" class="btn-style">Book Now</button>
             <p id="confirmation-Booking"></p>
         </div>
     </main>
@@ -166,11 +166,7 @@
 
         const grandTotalBookingPrice = totalBookingPrice + tax;
         document.getElementById('grandTotalBooking-price').innerText = '$' + grandTotalBookingPrice;
-
     }
-
-
-
     function getInputValue(oceanTime) {
         const oceanTimeInput = document.getElementById(oceanTime + '-booking');
         const oceanTimeBooking = parseInt(oceanTimeInput.value);
@@ -178,7 +174,7 @@
     }
 
 
-    function myFunction() {
+    function letConfirm() {
         var txt;
         var r = confirm("Press a button!");
         if (r == true) {
